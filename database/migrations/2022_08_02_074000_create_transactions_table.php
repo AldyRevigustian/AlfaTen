@@ -18,8 +18,8 @@ class CreateTransactionsTable extends Migration
             $table->foreignId('product_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->integer('quantity');
-            $table->string('status');
-            $table->string('invoice_code');
+            $table->string('status')->default('unpaid');
+            $table->string('invoice_code')->nullable();
             $table->timestamps();
         });
     }

@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ManagerController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +17,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/home');
 });
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::controller(App\Http\Controllers\Customer\HomeController::class)->prefix('customer')->group(function(){
+    Route::get('/home', 'index')->name('customer.home');
+    Route::post('/addToCart', 'addToCart')->name('customer.addToCart');
+});
+
+Route::get('cashier/home', function(){})->name('cashier.home');
+Route::get('manager/home', function(){})->name('manager.home');
