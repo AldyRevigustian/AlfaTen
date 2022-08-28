@@ -40,7 +40,7 @@ class HomeController extends Controller
                     ];
                 }
 
-                $product->potongan = $product->discount-> percentage / 100 * $product->price;
+                $product->potongan = $product->discount->percentage / 100 * $product->price;
                 $product->new_price = $product->price - $product->potongan;
             }
         }
@@ -48,24 +48,38 @@ class HomeController extends Controller
         // dd($categories);
 
         $carts = Transaction::where('user_id', Auth::user()->id)->where('status', 'unpaid')->get();
-        $jumlah_cart = $carts->sum('quantity');
+        $jumlah_cart = count($carts);
+        // $jumlah_cart = $carts->sum('quantity');
 
         // foreach($carts as $cart){
         //     $jumlah_cart += $cart->quantity;
         // }
+
+        // dd(count($carts));
 
         return view('customer.home', compact('categories', 'jumlah_cart',));
     }
 
     public function addToCart(Request $request)
     {
-        // dd($request->all());
-        $transaction = Transaction::create([
-            'product_id' => $request->product_id,
-            'user_id' => Auth::user()->id,
-            'quantity' => $request->quantity
-        ]);
+        $same = Transaction::where('product_id', $request->product_id)->first();
 
+        // dd($same);
+        $trans = Transaction::where('product_id', $request->product_id)->get();
+
+        if ($same) {
+            foreach($trans as $tr){
+                $transaction = $tr->update([
+                    'quantity' => $tr->quantity += $request->quantity
+                ]);
+            }
+        }else{
+            $transaction = Transaction::create([
+                'product_id' => $request->product_id,
+                'user_id' => Auth::user()->id,
+                'quantity' => $request->quantity
+            ]);
+        }
         return redirect()->back()->with('status', 'Berhasil menambahkan ke keranjang')->with('data', $transaction);
     }
 

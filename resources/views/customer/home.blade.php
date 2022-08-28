@@ -61,7 +61,7 @@
                                                                     <input type="hidden" value="{{ $product->id }}"
                                                                         name="product_id">
                                                                     Nama Produk : {{ $product->name }}<br>
-                                                                    Harga : {{ $product->price }}<br>
+                                                                    Harga : {{ $product->new_price }}<br>
                                                                     {{-- Harga : {{ $product->diskon }}<br> --}}
                                                                     Jumlah Beli : <input type="number" name="quantity"
                                                                         class="form-control">

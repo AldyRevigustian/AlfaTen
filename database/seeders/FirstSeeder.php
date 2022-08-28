@@ -35,9 +35,9 @@ class FirstSeeder extends Seeder
             'password' => Hash::make('password')
         ]);
         User::create([
-            'name' => 'Gustian',
-            'email' => 'dey@gmail.com',
-            'username' => 'Gustian',
+            'name' => 'Customer',
+            'email' => 'customer@gmail.com',
+            'username' => 'Customer',
             'password' => Hash::make('password')
         ]);
 
@@ -76,7 +76,7 @@ class FirstSeeder extends Seeder
         Product::create([
             'name' => 'Lays',
             'price' => 11300,
-            'thumbnail' => 'Lays.jpg',
+            'thumbnail' => 'lays.jpg',
             'desc' => 'Enak tau',
             'category_id' => 1
         ]);
@@ -108,7 +108,7 @@ class FirstSeeder extends Seeder
         Product::create([
             'name' => 'Bodrex',
             'price' => 5000,
-            'thumbnail' => 'bordrex.jpg',
+            'thumbnail' => 'bodrex.jpg',
             'desc' => 'Obat sakit kepala',
             'category_id' => 5
         ]);
@@ -186,15 +186,15 @@ class FirstSeeder extends Seeder
         Discount::create([
             "product_id" => 4,
             "percentage" => 10,
-            "start_date" => '2022-01-08',
-            "end_date" => '2022-01-30',
+            "start_date" => '2022-08-01',
+            "end_date" => '2022-08-30',
         ]);
 
         Discount::create([
             "product_id" => 3,
             "percentage" => 5,
-            "start_date" => '2022-01-08',
-            "end_date" => '2022-01-15',
+            "start_date" => '2022-08-01',
+            "end_date" => '2022-08-30',
         ]);
     }
 }
