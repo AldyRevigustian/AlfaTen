@@ -143,45 +143,6 @@ class FirstSeeder extends Seeder
             'expire_date' => '2023-05-01'
         ]);
 
-        Transaction::create([
-            'product_id' => 1,
-            'user_id' => 2,
-            'quantity' => 3,
-            'status' => 'unpaid',
-            'invoice_code' => 'INV_32301',
-        ]);
-
-        Transaction::create([
-            'product_id' => 2,
-            'user_id' => 2,
-            'quantity' => 5,
-            'status' => 'unpaid',
-            'invoice_code' => 'INV_32301',
-        ]);
-
-        Transaction::create([
-            'product_id' => 3,
-            'user_id' => 2,
-            'quantity' => 1,
-            'status' => 'unpaid',
-            'invoice_code' => 'INV_32301',
-        ]);
-
-        Transaction::create([
-            'product_id' => 4,
-            'user_id' => 2,
-            'quantity' => 1,
-            'status' => 'unpaid',
-            'invoice_code' => 'INV_32301',
-        ]);
-
-        Transaction::create([
-            'product_id' => 5,
-            'user_id' => 2,
-            'quantity' => 3,
-            'status' => 'unpaid',
-            'invoice_code' => 'INV_32301',
-        ]);
 
         Discount::create([
             "product_id" => 4,
