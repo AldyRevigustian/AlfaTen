@@ -40,8 +40,8 @@ class CartsController extends Controller
                 $cart->product->new_price = $cart->product->price - $cart->product->potongan;
         }
 
-        $jumlah_cart = count($carts);
-        // $jumlah_cart = $carts->sum('quantity');
+        // $jumlah_cart = count($carts);
+        $jumlah_cart = $carts->sum('quantity');
         $total_harga = 0;
 
         foreach ($carts as $cart) {
@@ -51,38 +51,6 @@ class CartsController extends Controller
 
 
         return view('customer.carts', compact('carts', 'total_harga', 'jumlah_cart'));
-
-
-
-        //  $categories = Category::with('products.discounts')->get();
-
-        // foreach ($categories as $category) {
-        //     foreach ($category->products as $product) {
-        //         $product->discount =  Discount::where('product_id', $product->id)
-        //             ->where('start_date', "<=", date('Y-m-d'))
-        //             ->where('end_date', '>=', date('Y-m-d'))->first();
-
-        //         if ($product->discount == null) {
-        //             $product->discount = (object)[
-        //                 "percentage" => 0
-        //             ];
-        //         }
-
-        //         $product->potongan = $product->discount->percentage / 100 * $product->price;
-        //         $product->new_price = $product->price - $product->potongan;
-        //     }
-        // }
-
-        // // dd($categories);
-
-        // $carts = Transaction::where('user_id', Auth::user()->id)->where('status', 'unpaid')->get();
-        // $jumlah_cart = $carts->sum('quantity');
-
-        // // foreach($carts as $cart){
-        // //     $jumlah_cart += $cart->quantity;
-        // // }
-
-        // return view('customer.home', compact('categories', 'jumlah_cart',));
     }
 
     /**

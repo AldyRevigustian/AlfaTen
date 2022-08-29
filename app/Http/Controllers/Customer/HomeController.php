@@ -48,8 +48,8 @@ class HomeController extends Controller
         // dd($categories);
 
         $carts = Transaction::where('user_id', Auth::user()->id)->where('status', 'unpaid')->get();
-        $jumlah_cart = count($carts);
-        // $jumlah_cart = $carts->sum('quantity');
+        // $jumlah_cart = count($carts);
+        $jumlah_cart = $carts->sum('quantity');
 
         // foreach($carts as $cart){
         //     $jumlah_cart += $cart->quantity;
@@ -62,7 +62,7 @@ class HomeController extends Controller
 
     public function addToCart(Request $request)
     {
-        $same = Transaction::where('product_id', $request->product_id)->first();
+        $same = Transaction::where('product_id', $request->product_id)->where('user_id', Auth::user()->id)->where('status', 'unpaid')->first();
 
         // dd($same);
         $trans = Transaction::where('product_id', $request->product_id)->get();
