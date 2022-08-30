@@ -51,12 +51,6 @@ class HomeController extends Controller
         // $jumlah_cart = count($carts);
         $jumlah_cart = $carts->sum('quantity');
 
-        // foreach($carts as $cart){
-        //     $jumlah_cart += $cart->quantity;
-        // }
-
-        // dd(count($carts));
-
         return view('customer.home', compact('categories', 'jumlah_cart',));
     }
 

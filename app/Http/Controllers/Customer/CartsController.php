@@ -112,8 +112,7 @@ class CartsController extends Controller
         ]);
 
         if ($succ) {
-            session()->flash('success', 'Carts successfully updated');
-            return redirect()->route('customer.carts');
+            return redirect()->route('customer.carts')->with('status', 'Carts successfully updated');
         } else {
             session()->flash('error', 'Failed to update Carts');
         }
@@ -130,8 +129,7 @@ class CartsController extends Controller
         $carts = Transaction::find($id)->delete();
 
         if ($carts) {
-            session()->flash('success', 'Carts successfully deleted');
-            return redirect()->route('customer.carts');
+            return redirect()->route('customer.carts')->with('status', 'Carts successfully deleted');
         } else {
             session()->flash('error', 'Failed to delete Carts');
         }

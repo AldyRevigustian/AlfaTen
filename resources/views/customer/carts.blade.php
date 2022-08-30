@@ -17,8 +17,9 @@
                 {{ session('status') }}
             </div>
         @endif
+
         <div class="row">
-            <div class="col-md-9 col-sm-12 mt-4">
+            <div class="col-md-9 col-sm-12">
                 <h3>Daftar Produk</h3>
                 <div class="card mt-3 p-3 border-0 shadow-sm rounded" style="min-height: 130px">
                     @foreach ($carts as $cart)
@@ -38,74 +39,104 @@
                                     data-bs-target="#detail-{{ $cart->id }}">
                                     <i class="bi bi-pencil-fill text-light"></i>
                                 </button>
-                                <form action="{{ route('customer.deletecart', $cart->id) }}" method="POST"
-                                    class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger btn-sm">
-                                        <i class="bi bi-trash-fill"></i>
-                                    </button>
-                                </form>
-                            </div>
 
-                            <!-- Modal -->
-                            <div class="modal fade" id="detail-{{ $cart->id }}" tabindex="-1"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Detail Produk
-                                                {{ $cart->product->name }}
-                                            </h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <form action="{{ route('customer.updatecart', $cart->id) }}" method="POST">
-                                            @csrf
-                                            @method('PUT')
-                                            <div class="modal-body">
-                                                <input type="hidden" value="{{ $cart->product->id }}" name="product_id">
-                                                <div class="text-center mb-2" style="height: 150px;">
-                                                    <img src="/storage/products/{{ $cart->product->thumbnail }}"
-                                                        alt="" height="100%">
-                                                </div>
-                                                <h5>
-                                                    Nama Produk : <b>{{ $cart->product->name }}</b>
+                                <!-- Modal -->
+                                <div class="modal fade" id="detail-{{ $cart->id }}" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Detail Produk
+                                                    {{ $cart->product->name }}
                                                 </h5>
-                                                <h6>
-                                                    Harga : Rp. {{ $cart->product->new_price }}
-                                                </h6>
-                                                {{-- Harga : {{ $cart->product->diskon }}<br> --}}
-                                                <h6> Quantity : </h6>
-                                                <div class="input-group" style="max-width: 150px">
-                                                    <span class="input-group-btn">
-                                                        <button type="button" style="border-radius: 5px 0px 0px 5px"
-                                                            class="btn btn-danger btn-number" data-type="minus"
-                                                            data-field="quantity">
-                                                            <i class="bi bi-dash-lg"></i>
-                                                        </button>
-                                                    </span>
-                                                    <input type="text" name="quantity" class="form-control input-number"
-                                                        value="{{ $cart->quantity }}" min="1" max="100">
-                                                    <span class="input-group-btn">
-                                                        <button type="button" style="border-radius: 0px 5px 5px 0px"
-                                                            class="btn btn-success btn-number" data-type="plus"
-                                                            data-field="quantity">
-                                                            <i class="bi bi-plus-lg"></i>
-                                                        </button>
-                                                    </span>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <form action="{{ route('customer.updatecart', $cart->id) }}" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="modal-body">
+                                                    <input type="hidden" value="{{ $cart->product->id }}"
+                                                        name="product_id">
+                                                    <div class="text-center mb-2" style="height: 150px;">
+                                                        <img src="/storage/products/{{ $cart->product->thumbnail }}"
+                                                            alt="" height="100%">
+                                                    </div>
+                                                    <h5>
+                                                        Nama Produk : <b>{{ $cart->product->name }}</b>
+                                                    </h5>
+                                                    <h6>
+                                                        Harga : Rp. {{ $cart->product->new_price }}
+                                                    </h6>
+                                                    {{-- Harga : {{ $cart->product->diskon }}<br> --}}
+                                                    <h6> Quantity : </h6>
+                                                    <div class="input-group" style="max-width: 150px">
+                                                        <span class="input-group-btn">
+                                                            <button type="button" style="border-radius: 5px 0px 0px 5px"
+                                                                class="btn btn-danger btn-number" data-type="minus"
+                                                                data-field="quantity">
+                                                                <i class="bi bi-dash-lg"></i>
+                                                            </button>
+                                                        </span>
+                                                        <input type="text" name="quantity"
+                                                            class="form-control input-number" value="{{ $cart->quantity }}"
+                                                            min="1" max="100">
+                                                        <span class="input-group-btn">
+                                                            <button type="button" style="border-radius: 0px 5px 5px 0px"
+                                                                class="btn btn-success btn-number" data-type="plus"
+                                                                data-field="quantity">
+                                                                <i class="bi bi-plus-lg"></i>
+                                                            </button>
+                                                        </span>
+                                                    </div>
                                                 </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Save
+                                                        changes</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <button class="btn btn-danger btn-sm" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#delete-{{ $cart->id }}">
+                                    <i class="bi bi-trash-fill"></i>
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="delete-{{ $cart->id }}" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Detail Produk
+                                                    {{ $cart->product->name }}
+                                                </h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Save
-                                                    changes</button>
-                                            </div>
-                                        </form>
+                                            <form action="{{ route('customer.deletecart', $cart->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <div class="modal-body">
+                                                    Are You Sure Want To Delete This Product?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Oke</button>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
+
                         </div>
                     @endforeach
                 </div>
@@ -148,8 +179,6 @@
 
 @push('scripts')
     <script>
-        //plugin bootstrap minus and plus
-        //http://jsfiddle.net/laelitenetwork/puJ6G/
         $('.btn-number').click(function(e) {
             e.preventDefault();
 
